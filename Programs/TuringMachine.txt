@@ -1,0 +1,83 @@
+state= 0 //This Turing Machine adds 1 to a binary number read from the keyboard
+position= 96 //start of tape
+CLS
+HLT
+read_input: READ
+LDB position
+STAB
+CMP 0
+JEQ input_done
+OUT
+LDA position
+ADD 1
+STA position
+JMP read_input
+input_done: LDA 10
+OUT
+OUT
+LDA 96 //reset position to start of tape
+STA position
+tm_start: LDA state
+CMP 0
+JEQ q0
+CMP 1
+JEQ q1
+CMP 2
+JEQ q2
+q0: LDB position //q0
+LDAB
+CMP 0
+LDA position
+JEQ q0_else
+ADD 1
+STA position
+JMP tm_start
+q0_else: SUB 1
+STA position
+LDA state
+ADD 1
+STA state
+JMP tm_start
+q1: LDB position //q1
+LDAB
+CMP 49
+LDA position
+JEQ q1_else
+LDA 49
+LDB position
+STAB
+LDA position
+ADD 1
+STA position
+LDA state
+ADD 1
+STA state
+JMP tm_start
+q1_else: SUB 1
+STA position
+JMP tm_start
+q2: LDB position //q2
+LDAB
+CMP 49
+LDA position
+JEQ q2_else
+JMP print_output
+q2_else: LDA 48
+LDB position
+STAB
+LDA position
+ADD 1
+STA position
+JMP tm_start
+print_output: LDA 96
+STA position
+next_char: LDB position
+LDAB
+CMP 0
+JEQ done
+OUT
+LDA position
+ADD 1
+STA position
+JMP next_char
+done: HLT
