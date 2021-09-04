@@ -7,14 +7,14 @@ LDB position
 STAB
 CMP 0
 JEQ input_done
-OUT
+PRINT
 LDA position
 ADD 1
 STA position
 JMP read_input
 input_done: LDA 10
-OUT
-OUT
+PRINT
+PRINT
 LDA 96 //reset position to start of tape
 STA position
 tm_start: LDA state
@@ -61,7 +61,7 @@ LDAB
 CMP 49
 LDA position
 JEQ q2_else
-JMP print_output
+JMP print_PRINTput
 q2_else: LDA 48
 LDB position
 STAB
@@ -69,13 +69,13 @@ LDA position
 ADD 1
 STA position
 JMP tm_start
-print_output: LDA 96
+print_PRINTput: LDA 96
 STA position
 next_char: LDB position
 LDAB
 CMP 0
 JEQ done
-OUT
+PRINT
 LDA position
 ADD 1
 STA position

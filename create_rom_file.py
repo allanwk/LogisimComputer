@@ -3,7 +3,7 @@ import numpy as np
 from tqdm import tqdm
 
 #Opening spreadsheet containing instruction codes and control words
-df = pd.read_excel('16bit_instruction_set.xlsx', dtype=str)
+df = pd.read_excel('16bit_set.xlsx', dtype=str)
 n_instructions = len(df)
 
 #Creating multiples for handling flag signals
@@ -42,6 +42,9 @@ for i in tqdm(range(len(df))):
         df.loc[i, ['RO']] = 1
         df.loc[i, ['J']] = 1
     elif df.loc[i, ['Instruction']]['Instruction'] == 'JL' and check_flag(df.loc[i, ['Flags']]['Flags'], 4) and df.loc[i, ['Step']]['Step'] == '011':
+        df.loc[i, ['RO']] = 1
+        df.loc[i, ['J']] = 1
+    elif df.loc[i, ['Instruction']]['Instruction'] == 'JC' and check_flag(df.loc[i, ['Flags']]['Flags'], 0) and df.loc[i, ['Step']]['Step'] == '011':
         df.loc[i, ['RO']] = 1
         df.loc[i, ['J']] = 1
 

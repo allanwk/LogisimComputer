@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import sys
 
 #Get instruction codes from spreadsheet
 df = pd.read_excel('16bit_set.xlsx', dtype=str)
@@ -93,4 +94,4 @@ def compile(filename):
     print("Compiled to RAM.txt")   
 
 if __name__ == '__main__':
-    compile('TuringMachine.txt')
+    compile(sys.argv[1])

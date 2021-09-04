@@ -1,0 +1,17 @@
+n0= 1
+n1= 1
+prev= 0
+start: LDA n1
+OUT
+STA prev
+ADD n0
+JC reset
+STA n1
+LDA prev
+STA n0
+JMP start
+reset: LDA 1
+STA n0
+STA n1
+CLS
+JMP start
